@@ -9,31 +9,37 @@
 import UIKit
 import Alamofire
 
-let STOCKS_URL = ""
-
 class ViewController: UIViewController {
     
-    let STOCKS_URL = "https://www.alphavantage.co/query?"
-    let APP_ID = "YF4GKFKVSW54BMH4"
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        Alamofire.request("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=INTL&interval=60min&apikey=\(APP_ID)").responseJSON {
-            response in
-            
-            if let json = response.result.value {
-                print("JSON: \(json)") // serialized json response
-            } else {
-                print("Error \(String(describing: response.result.error))")
-            }
-            
-        }
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let STOCKS_URL = "https://www.alphavantage.co/query"
+        let STOCKS_FUNCTION = "TIME_SERIES_DAILY"
+        let SYMBOL = "INTL"
+        let INTERVAL = "60min"
+        let APP_ID = "YF4GKFKVSW54BMH4"
+        let params : [String : String] = ["function" : STOCKS_FUNCTION, "symbol" : SYMBOL, "interval" : INTERVAL, "apikey" : APP_ID]
+
+        getStocksData(url: STOCKS_URL, parameters: params)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getStocksData(url: String, parameters: [String : String]) {
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON {
+            response in
+            if let json = response.result.value {
+                print("\(url)\(parameters)")
+                print("JSON: \(json)")
+            } else {
+                print("Failed")
+            }
+        }
     }
 
 
