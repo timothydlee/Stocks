@@ -48,6 +48,31 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C002EF98204E949700E67530 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C002EF99204E94A100E67530 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C05BBE25204D469A0045362C /* Main.storyboard */,
+				C05BBE2A204D469A0045362C /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C002EF9A204E94A900E67530 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C05BBE23204D469A0045362C /* ViewController.swift */,
+				C05BBE21204D469A0045362C /* AppDelegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C05BBE15204D469A0045362C = {
 			isa = PBXGroup;
 			children = (
@@ -69,11 +94,10 @@
 		C05BBE20204D469A0045362C /* stocks */ = {
 			isa = PBXGroup;
 			children = (
-				C05BBE21204D469A0045362C /* AppDelegate.swift */,
-				C05BBE23204D469A0045362C /* ViewController.swift */,
-				C05BBE25204D469A0045362C /* Main.storyboard */,
+				C002EF98204E949700E67530 /* Model */,
+				C002EF99204E94A100E67530 /* View */,
+				C002EF9A204E94A900E67530 /* Controller */,
 				C05BBE28204D469A0045362C /* Assets.xcassets */,
-				C05BBE2A204D469A0045362C /* LaunchScreen.storyboard */,
 				C05BBE2D204D469A0045362C /* Info.plist */,
 			);
 			path = stocks;

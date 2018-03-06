@@ -30,6 +30,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    //MARK: Get Initial Stock Call
+    /***************************************************************/
+
     func getStocksData(url: String, parameters: [String : String]) {
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON {
             response in
