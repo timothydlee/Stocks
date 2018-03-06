@@ -20,9 +20,12 @@ class ViewController: UIViewController {
         let SYMBOL = "INTL"
         let INTERVAL = "60min"
         let APP_ID = "YF4GKFKVSW54BMH4"
-        let params : [String : String] = ["function" : STOCKS_FUNCTION, "symbol" : SYMBOL, "interval" : INTERVAL, "apikey" : APP_ID]
+        let initialStockParams : [String : String] = ["function" : STOCKS_FUNCTION, "symbol" : SYMBOL, "interval" : INTERVAL, "apikey" : APP_ID]
+        let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "MSFT,AAPL,INTL", "apikey" : APP_ID]
 
-        getStocksData(url: STOCKS_URL, parameters: params)
+        getStocksData(url: STOCKS_URL, parameters: initialStockParams)
+        getStocksData(url: STOCKS_URL, parameters: batchStockParams)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,6 +49,19 @@ class ViewController: UIViewController {
         }
     }
 
+    //MARK: Get Batch Stocks Call
+    
+//    func getBatchStocksData(url: String, parameters: [String : String]) {
+//        Alamofire.request(url, method: .get, parameters: parameters).responseJSON {
+//            response in
+//            if let json = response.result.value {
+//                print("\(url)\(parameters)")
+//                print("JSON: \(json)")
+//            } else {
+//                print("Failed")
+//            }
+//        }
+//    }
 
 }
 
