@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class ViewController: UIViewController {
     
@@ -16,14 +17,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let STOCKS_URL = "https://www.alphavantage.co/query"
-        let STOCKS_FUNCTION = "TIME_SERIES_DAILY"
         let SYMBOL = "INTL"
         let INTERVAL = "60min"
         let APP_ID = "YF4GKFKVSW54BMH4"
-        let initialStockParams : [String : String] = ["function" : STOCKS_FUNCTION, "symbol" : SYMBOL, "interval" : INTERVAL, "apikey" : APP_ID]
+        let initialStockParams : [String : String] = ["function" : "TIME_SERIES_DAILY", "symbol" : SYMBOL, "interval" : INTERVAL, "apikey" : APP_ID]
         let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "MSFT,AAPL,INTL", "apikey" : APP_ID]
 
-        getStocksData(url: STOCKS_URL, parameters: initialStockParams)
+//        getStocksData(url: STOCKS_URL, parameters: initialStockParams)
         getStocksData(url: STOCKS_URL, parameters: batchStockParams)
         
     }
@@ -34,34 +34,35 @@ class ViewController: UIViewController {
     }
     
     
+    @IBOutlet weak var stockLabel: UILabel!
+    
     //MARK: Get Initial Stock Call
     /***************************************************************/
 
     func getStocksData(url: String, parameters: [String : String]) {
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON {
             response in
-            if let json = response.result.value {
-                print("\(url)\(parameters)")
-                print("JSON: \(json)")
+            if response.result.isSuccess {
+                
+                let stockJSON : JSON = JSON(response.result.value!)
+                self.updateStockData(json: stockJSON)
+                
             } else {
+                
                 print("Failed")
+                
             }
         }
     }
-
-    //MARK: Get Batch Stocks Call
     
-//    func getBatchStocksData(url: String, parameters: [String : String]) {
-//        Alamofire.request(url, method: .get, parameters: parameters).responseJSON {
-//            response in
-//            if let json = response.result.value {
-//                print("\(url)\(parameters)")
-//                print("JSON: \(json)")
-//            } else {
-//                print("Failed")
-//            }
-//        }
-//    }
+    //MARK: Updates Stocks and Parses JSON
+    func updateStockData(json: JSON) {
+        
+        for stock in 0..<json["Stock Quotes"].count {
+            print(json["Stock Quotes"][stock])
+        }
+        
+    }
 
 }
 
