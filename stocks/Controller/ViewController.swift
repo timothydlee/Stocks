@@ -13,8 +13,12 @@ import SwiftyJSON
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+    let stocksDataModel = StocksDataModel()
+
+    var jsonResult : Array<Any> = []
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         self.tableView.delegate = self
@@ -22,9 +26,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let STOCKS_URL = "https://www.alphavantage.co/query"
         let APP_ID = "YF4GKFKVSW54BMH4"
-        let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "MSFT,AAPL,INTL", "apikey" : APP_ID]
-        let res = getStocksData(url: STOCKS_URL, parameters: batchStockParams)
-        print(res)
+        let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "SIRI,AAPL,INTL", "apikey" : APP_ID]
+        getStocksData(url: STOCKS_URL, parameters: batchStockParams)
+        print(jsonResult)
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -34,13 +39,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let STOCKS_URL = "https://www.alphavantage.co/query"
-//        let APP_ID = "YF4GKFKVSW54BMH4"
-//        let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "MSFT,AAPL,INTL", "apikey" : APP_ID]
-//
-//        let result = getStocksData(url: STOCKS_URL, parameters: batchStockParams)
-//
-//        print(result)
         return 1
     }
     
@@ -54,7 +52,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: Get Initial Stock Call
     /***************************************************************/
 
-    func getStocksData(url: String, parameters: [String : String])  {
+    func getStocksData(url: String, parameters: [String : String]) {
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON {
             response in
             
@@ -63,7 +61,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let result = response.result.value!
                 let stockJSON : JSON = JSON(result)
                 let stocksArray = self.updateStockData(json: stockJSON)
-                print(stocksArray)
+                self.jsonResult = stocksArray
                 
             } else {
                 
@@ -72,20 +70,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             
         }
+        
     }
     
     //MARK: Updates Stocks and Parses JSON
     /***************************************************************/
     
     func updateStockData(json: JSON) -> Array<Any> {
-
+        
         var stocksArray = [] as Array
 
         for stock in 0..<json["Stock Quotes"].count {
-            stocksArray.append(json["Stock Quotes"][stock])
+            let stockSymbol = json["Stock Quotes"][stock]["1. symbol"].stringValue
+            let stockPrice = json["Stock Quotes"][stock]["2. price"].doubleValue
+            stocksArray.append((stockSymbol, stockPrice))
         }
-        
-
+        print("In updateStockData \(stocksArray)")
         return stocksArray
     }
     
