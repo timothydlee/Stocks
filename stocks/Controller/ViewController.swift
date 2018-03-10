@@ -30,10 +30,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let APP_ID = "YF4GKFKVSW54BMH4"
         let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "SIRI,AAPL,INTL", "apikey" : APP_ID]
         getStocksData(url: STOCKS_URL, parameters: batchStockParams)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            print(self.jsonResult)
-        }
-        
+    
         
     }
     
@@ -44,9 +41,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            print(self.jsonResult.count)
-        }
         return 1
     }
     
@@ -60,25 +54,39 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: Get Initial Stock Call
     /***************************************************************/
 
-    func getStocksData(url: String, parameters: [String : String]) {
-        Alamofire.request(url, method: .get, parameters: parameters).responseJSON {
-            response in
-            
-            if response.result.isSuccess {
-                
-                let result = response.result.value!
-                let stockJSON : JSON = JSON(result)
-                let stocksArray = self.updateStockData(json: stockJSON)
-                self.jsonResult = stocksArray
-                
-            } else {
-                
-                print("Failed")
+//    func getStocksData(url: String, parameters: [String : String]) {
+//        Alamofire.request(url, method: .get, parameters: parameters).responseJSON {
+//            response in
+//
+//            if response.result.isSuccess {
+//
+//                let result = response.result.value!
+//                let stockJSON : JSON = JSON(result)
+//                let stocksArray = self.updateStockData(json: stockJSON)
+//                self.jsonResult = stocksArray
+//
+//            } else {
+//
+//                print("Failed")
+//
+//            }
+//        }
+//    }
+    
+    
+    func getStocksData(url: String, parameters: [String : String]) -> Promise<JSON> {
+        return Promise { fulfill in
+            Alamofire.request(url, method: .get, parameters: parameters)
+                .responseJSON { response in
+                    if let result = response.result.value {
+                        let json = JSON(result)
+                        print(json)
+                    } else {
+                        print("Error")
+                    }
                 
             }
-            
         }
-        
     }
     
     //MARK: Updates Stocks and Parses JSON
