@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import PromiseKit
+
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -28,7 +30,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let APP_ID = "YF4GKFKVSW54BMH4"
         let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "SIRI,AAPL,INTL", "apikey" : APP_ID]
         getStocksData(url: STOCKS_URL, parameters: batchStockParams)
-        print(jsonResult)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            print(self.jsonResult)
+        }
+        
         
     }
     
@@ -39,6 +44,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            print(self.jsonResult.count)
+        }
         return 1
     }
     
@@ -85,7 +93,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let stockPrice = json["Stock Quotes"][stock]["2. price"].doubleValue
             stocksArray.append((stockSymbol, stockPrice))
         }
-        print("In updateStockData \(stocksArray)")
         return stocksArray
     }
     
