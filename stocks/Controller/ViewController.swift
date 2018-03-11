@@ -36,6 +36,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stockCell")
+<<<<<<< HEAD
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 //            // your code here
 //        }
@@ -43,6 +44,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell?.detailTextLabel?.text = stocksDataModel.stockInfo[indexPath.row].1
         
 
+=======
+>>>>>>> parent of 8e22cbc... Got array into format that I want. Need to figure out how to make it visible to rest of the functions.
         
         return cell!
     }
