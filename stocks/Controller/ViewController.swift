@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var tableView: UITableView!
     let stocksDataModel = StocksDataModel()
 
-    var jsonResult : Array<Any> = []
+    var jsonArray : Array<Any> = []
     
     override func viewDidLoad() {
         
@@ -36,22 +36,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stockCell")
-<<<<<<< HEAD
+
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 //            // your code here
 //        }
-        cell?.textLabel?.text = jsonArray[indexPath.row].0
-        cell?.detailTextLabel?.text = jsonArray[indexPath.row].1
-        
-
-=======
->>>>>>> parent of 8e22cbc... Got array into format that I want. Need to figure out how to make it visible to rest of the functions.
+        cell?.textLabel?.text = self.stocksDataModel.stockInfo[indexPath.row].0
+        cell?.detailTextLabel?.text = self.stocksDataModel.stockInfo[indexPath.row].1
         
         return cell!
+        
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return self.stocksDataModel.stockInfo.count
     }
     
     
