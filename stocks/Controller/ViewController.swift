@@ -74,7 +74,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //
 //            } else {
 //
-//                print("Failed")
+//                print("Error \(String(describing: response.result.error))")
 //
 //            }
 //        }
