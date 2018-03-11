@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var tableView: UITableView!
     let stocksDataModel = StocksDataModel()
 
-    var jsonResult : Array<Any> = []
+    var jsonArray : Array<Any> = []
     
     override func viewDidLoad() {
         
@@ -29,13 +29,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let STOCKS_URL = "https://www.alphavantage.co/query"
         let APP_ID = "YF4GKFKVSW54BMH4"
         let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "SIRI,AAPL,INTL", "apikey" : APP_ID]
-        getStocksData(url: STOCKS_URL, parameters: batchStockParams)
-    
         
+        let jsonPromise: Promise<JSON> = getStocksData(url: STOCKS_URL, parameters: batchStockParams)
+        print(jsonPromise)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stockCell")
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//            // your code here
+//        }
+        cell?.textLabel?.text = jsonArray[indexPath.row].0
+        cell?.detailTextLabel?.text = jsonArray[indexPath.row].1
+        
+
         
         return cell!
     }
@@ -80,9 +87,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 .responseJSON { response in
                     if let result = response.result.value {
                         let json = JSON(result)
-                        print(json)
+                        self.updateStockData(json: json)
                     } else {
-                        print("Error")
+                        print("Error \(String(describing: response.result.error))")
                     }
                 
             }
@@ -99,8 +106,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         for stock in 0..<json["Stock Quotes"].count {
             let stockSymbol = json["Stock Quotes"][stock]["1. symbol"].stringValue
             let stockPrice = json["Stock Quotes"][stock]["2. price"].doubleValue
-            stocksArray.append((stockSymbol, stockPrice))
+            let stockPriceRounded = String(format: "%.2f", arguments: [stockPrice])
+            stocksArray.append((stockSymbol, stockPriceRounded))
         }
+        print(stocksArray)
+        self.jsonArray = stocksArray
         return stocksArray
     }
     

@@ -11,5 +11,5 @@ import UIKit
 
 class StocksDataModel {
     var symbol : String = ""
-    var price : Int = 0
+    var price : String = ""
 }
