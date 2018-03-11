@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var tableView: UITableView!
     let stocksDataModel = StocksDataModel()
 
-    var jsonArray : Array<Any> = []
+    var jsonResult : Array<Any> = []
     
     override func viewDidLoad() {
         
@@ -29,9 +29,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let STOCKS_URL = "https://www.alphavantage.co/query"
         let APP_ID = "YF4GKFKVSW54BMH4"
         let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "SIRI,AAPL,INTL", "apikey" : APP_ID]
+        getStocksData(url: STOCKS_URL, parameters: batchStockParams)
+    
         
-        let jsonPromise: Promise<JSON> = getStocksData(url: STOCKS_URL, parameters: batchStockParams)
-        print(jsonPromise)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -87,9 +87,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 .responseJSON { response in
                     if let result = response.result.value {
                         let json = JSON(result)
-                        self.updateStockData(json: json)
+                        print(json)
                     } else {
-                        print("Error \(String(describing: response.result.error))")
+                        print("Error")
                     }
                 
             }
@@ -106,11 +106,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         for stock in 0..<json["Stock Quotes"].count {
             let stockSymbol = json["Stock Quotes"][stock]["1. symbol"].stringValue
             let stockPrice = json["Stock Quotes"][stock]["2. price"].doubleValue
-            let stockPriceRounded = String(format: "%.2f", arguments: [stockPrice])
-            stocksArray.append((stockSymbol, stockPriceRounded))
+            stocksArray.append((stockSymbol, stockPrice))
         }
-        print(stocksArray)
-        self.jsonArray = stocksArray
         return stocksArray
     }
     
