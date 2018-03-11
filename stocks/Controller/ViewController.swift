@@ -40,8 +40,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 //            // your code here
 //        }
-        cell?.textLabel?.text = stocksDataModel.stockInfo[indexPath.row].0
-        cell?.detailTextLabel?.text = stocksDataModel.stockInfo[indexPath.row].1
+        cell?.textLabel?.text = jsonArray[indexPath.row].0
+        cell?.detailTextLabel?.text = jsonArray[indexPath.row].1
         
 
 =======
@@ -51,7 +51,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.stocksDataModel.stockInfo.count
+        return 1
     }
     
     

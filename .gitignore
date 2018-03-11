@@ -1,2 +1,4 @@
 Pods/
 *.xcuserstate
+stocks.xcodeproj/project.pbxproj
+stocks/Controller/CustomTableViewCell.swift
