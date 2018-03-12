@@ -25,7 +25,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let STOCKS_URL = "https://www.alphavantage.co/query"
         let APP_ID = "YF4GKFKVSW54BMH4"
     
-        let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "INTL,SIRI,AAPL,MSFT,KBR", "apikey" : APP_ID]
+        let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "INTL,SIRI,AAPL,MSFT,KBR,GOOGL,SNAP,JPM,AXP", "apikey" : APP_ID]
         getStocksData(url: STOCKS_URL, parameters: batchStockParams)
 
     }
@@ -54,7 +54,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //MARK: Get Initial Stock Call
     /***************************************************************/
-
     //Function that uses Alamofire Cocoapod networking requests to request Alphavantage API.
     func getStocksData(url: String, parameters: [String : String]) {
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON {
@@ -80,10 +79,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-    //MARK: Updates Stocks and Parses JSON
+    //MARK: Updates Stocks and Parses JSON using SwiftyJSON
     /***************************************************************/
-    
-    //Function that uses SwiftyJSON to parse the JSON for Stock Symbol and Stock Price
     func updateStockData(json: JSON) -> Array<Array<String>> {
         
         var stocksArray : Array<Array<String>> = []
@@ -102,11 +99,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
+    //MARK: UITableViewCell styling
+    /***************************************************************/
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = UIColor.blue
+        cell.backgroundColor = UIColorFromHex(rgbValue: 0xf9f9f9)
     }
     
-    
+    //MARK: Function for using Hex Values for Color Styling
+    /***************************************************************/
+    func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
+        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
+        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
+        let blue = CGFloat(rgbValue & 0xFF)/256.0
+        
+        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
+    }
 
 }
 
