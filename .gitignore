@@ -3,3 +3,4 @@ Pods/
 stocks.xcodeproj/project.pbxproj
 stocks/Controller/CustomTableViewCell.swift
 stocks/.DS_Store
+.DS_Store
