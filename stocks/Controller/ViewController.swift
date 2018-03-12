@@ -24,9 +24,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let STOCKS_URL = "https://www.alphavantage.co/query"
         let APP_ID = "YF4GKFKVSW54BMH4"
+    
         let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "SIRI,AAPL,INTL", "apikey" : APP_ID]
         getStocksData(url: STOCKS_URL, parameters: batchStockParams)
-        
+
     }
     
     //Requisite function of the UITableView controller that populates cells in each row, iterating over the counter, indexPath
@@ -34,12 +35,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "stockCell")
         
-        if self.stocksDataModel.stockInfo.count > 0 {
-            
-            cell?.textLabel?.text = self.stocksDataModel.stockInfo[indexPath.row][0]
-            cell?.detailTextLabel?.text = self.stocksDataModel.stockInfo[indexPath.row][1]
-            
-        }
+        cell?.textLabel?.text = self.stocksDataModel.stockInfo[indexPath.row][0]
+        cell?.detailTextLabel?.text = self.stocksDataModel.stockInfo[indexPath.row][1]
         
         return cell!
         
@@ -73,6 +70,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 //.reloadData() calls to have the UITableView to reload. Because stocksDataModel is initiated as an empty array, the app would not recognize stocksDataModel as having any data populated in it, since the API call is asynchronous.
                 self.tableView.reloadData()
+                print(self.stocksDataModel.stockInfo)
 
             } else {
 
@@ -81,6 +79,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
+    
     
     //MARK: Updates Stocks and Parses JSON
     /***************************************************************/
@@ -102,6 +101,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return stocksArray
         
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.blue
     }
     
     
