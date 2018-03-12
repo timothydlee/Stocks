@@ -14,8 +14,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var tableView: UITableView!
     let stocksDataModel = StocksDataModel()
-
-    var jsonArray : Array<Array<String>> = []
     
     override func viewDidLoad() {
         
@@ -46,7 +44,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
-    //Function of the UITableView controller. Updates the TableView to contain as many rows as are returned - in this case, as many rows as exists in jsonArray
+    //Function of the UITableView controller. Updates the TableView to contain as many rows as are returned - in this case, as many rows as exists in stocksDataModel.stockInfo
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.stocksDataModel.stockInfo.count
     }
@@ -71,7 +69,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 //Setting model to result of the JSON parsing function
                 self.stocksDataModel.stockInfo = self.updateStockData(json: json)
                 
-                //.reloadData() calls to have the UITableView to reload. Because jsonArray is initiated as an empty array, the app would not recognize jsonArray as having any data populated in it, since the API call is asynchronous.
+                //.reloadData() calls to have the UITableView to reload. Because stocksDataModel is initiated as an empty array, the app would not recognize stocksDataModel as having any data populated in it, since the API call is asynchronous.
                 self.tableView.reloadData()
 
             } else {
