@@ -12,7 +12,9 @@ import SwiftyJSON
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+
     @IBOutlet weak var tableView: UITableView!
+    
     let stocksDataModel = StocksDataModel()
     
     override func viewDidLoad() {
@@ -25,7 +27,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let STOCKS_URL = "https://www.alphavantage.co/query"
         let APP_ID = "YF4GKFKVSW54BMH4"
     
-        let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "INTL,SIRI,AAPL,MSFT,KBR,GOOGL,SNAP,JPM,AXP", "apikey" : APP_ID]
+        let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "INTL,SIRI,AAPL,MSFT,KBR,GOOGL,SNAP,JPM,AXP,AMZN", "apikey" : APP_ID]
         getStocksData(url: STOCKS_URL, parameters: batchStockParams)
 
     }
