@@ -8,5 +8,4 @@ target 'stocks' do
   # Pods for stocks
   pod 'Alamofire'
   pod 'SwiftyJSON'
-  pod 'PromiseKit'
 end

@@ -9,8 +9,6 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-import PromiseKit
-
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -31,33 +29,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "SIRI,AAPL,INTL", "apikey" : APP_ID]
         getStocksData(url: STOCKS_URL, parameters: batchStockParams)
         
-    
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "stockCell")
-
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//            // your code here
-//        }
-    
-//
         
-        if self.jsonArray.count > 0 {
-            cell?.textLabel?.text = self.jsonArray[indexPath.row].first
-            cell?.detailTextLabel?.text = "fuck this shit"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "stockCell")
+        
+        if self.stocksDataModel.stockInfo.count > 0 {
+            
+            cell?.textLabel?.text = self.stocksDataModel.stockInfo[indexPath.row][0]
+            cell?.detailTextLabel?.text = self.stocksDataModel.stockInfo[indexPath.row][1]
+            
         }
         
         return cell!
         
     }
-
+    
+    //Function of the UITableView controller. Updates the TableView to contain as many rows as are returned - in this case, as many rows as exists in jsonArray
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.jsonArray.count
+        return self.stocksDataModel.stockInfo.count
     }
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -67,40 +59,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: Get Initial Stock Call
     /***************************************************************/
 
-//    func getStocksData(url: String, parameters: [String : String]) {
-//        Alamofire.request(url, method: .get, parameters: parameters).responseJSON {
-//            response in
-//
-//            if response.result.isSuccess {
-//
-//                let result = response.result.value!
-//                let stockJSON : JSON = JSON(result)
-//                let stocksArray = self.updateStockData(json: stockJSON)
-//                self.jsonResult = stocksArray
-//
-//            } else {
-//
-//                print("Error \(String(describing: response.result.error))")
-//
-//            }
-//        }
-//    }
-    
-    
-    func getStocksData(url: String, parameters: [String : String]) -> Promise<JSON> {
-        return Promise { fulfill in
-            Alamofire.request(url, method: .get, parameters: parameters)
-                .responseJSON { response in
-                    if let result = response.result.value {
-                        print("result")
-                        let json = JSON(result)
-                        self.jsonArray = self.updateStockData(json: json)
-                        
-                        self.tableView.reloadData()
-                    } else {
-                        print("Error")
-                    }
+    func getStocksData(url: String, parameters: [String : String]) {
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON {
+            response in
+
+            if response.result.isSuccess {
+
+                let result = response.result.value!
+                let json = JSON(result)
                 
+                //Setting model to result of the JSON parsing function
+                self.stocksDataModel.stockInfo = self.updateStockData(json: json)
+                
+                //.reloadData() calls to have the UITableView to reload. Because jsonArray is initiated as an empty array, the app would not recognize jsonArray as having any data populated in it, since the API call is asynchronous.
+                self.tableView.reloadData()
+
+            } else {
+
+                print("Error \(String(describing: response.result.error))")
+
             }
         }
     }
@@ -113,13 +90,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var stocksArray : Array<Array<String>> = []
 
         for stock in 0..<json["Stock Quotes"].count {
+            //Using SwiftyJSON to parse the JSON for Stock Symbol and Stock Price
             let stockSymbol = json["Stock Quotes"][stock]["1. symbol"].stringValue
             let stockPrice = json["Stock Quotes"][stock]["2. price"].doubleValue
+            //Formatting the price which returns with many decimals to 2 places
             let stockPriceRounded = String(format: "%.2f", arguments: [stockPrice])
             stocksArray.append([stockSymbol, stockPriceRounded])
+            
         }
         
         return stocksArray
+        
     }
     
     
