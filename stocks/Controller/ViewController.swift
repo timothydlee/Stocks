@@ -29,6 +29,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
+    //Requisite function of the UITableView controller that populates cells in each row, iterating over the counter, indexPath
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "stockCell")
@@ -44,7 +45,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
-    //Function of the UITableView controller. Updates the TableView to contain as many rows as are returned - in this case, as many rows as exists in stocksDataModel.stockInfo
+    //Requisite function of the UITableView controller. Updates the TableView to contain as many rows as are returned - in this case, as many rows as exists in stocksDataModel.stockInfo
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.stocksDataModel.stockInfo.count
     }
@@ -57,6 +58,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: Get Initial Stock Call
     /***************************************************************/
 
+    //Function that uses Alamofire Cocoapod networking requests to request Alphavantage API.
     func getStocksData(url: String, parameters: [String : String]) {
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON {
             response in
@@ -83,12 +85,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: Updates Stocks and Parses JSON
     /***************************************************************/
     
+    //Function that uses SwiftyJSON to parse the JSON for Stock Symbol and Stock Price
     func updateStockData(json: JSON) -> Array<Array<String>> {
         
         var stocksArray : Array<Array<String>> = []
 
         for stock in 0..<json["Stock Quotes"].count {
-            //Using SwiftyJSON to parse the JSON for Stock Symbol and Stock Price
+            
             let stockSymbol = json["Stock Quotes"][stock]["1. symbol"].stringValue
             let stockPrice = json["Stock Quotes"][stock]["2. price"].doubleValue
             //Formatting the price which returns with many decimals to 2 places

@@ -8,4 +8,5 @@ target 'stocks' do
   # Pods for stocks
   pod 'Alamofire'
   pod 'SwiftyJSON'
+  pod 'EasyAnimation'
 end
