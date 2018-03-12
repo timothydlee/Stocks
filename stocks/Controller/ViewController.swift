@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var tableView: UITableView!
     let stocksDataModel = StocksDataModel()
 
-    var jsonArray : Array<Any> = []
+    var jsonArray : Array<Array<String>> = []
     
     override func viewDidLoad() {
         
@@ -30,6 +30,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let APP_ID = "YF4GKFKVSW54BMH4"
         let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "SIRI,AAPL,INTL", "apikey" : APP_ID]
         getStocksData(url: STOCKS_URL, parameters: batchStockParams)
+        
     
         
     }
@@ -40,15 +41,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 //            // your code here
 //        }
-        cell?.textLabel?.text = self.stocksDataModel.stockInfo[indexPath.row].0
-        cell?.detailTextLabel?.text = self.stocksDataModel.stockInfo[indexPath.row].1
+    
+//
+        
+        if self.jsonArray.count > 0 {
+            cell?.textLabel?.text = self.jsonArray[indexPath.row].first
+            cell?.detailTextLabel?.text = "fuck this shit"
+        }
         
         return cell!
         
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.stocksDataModel.stockInfo.count
+        return self.jsonArray.count
     }
     
     
@@ -86,8 +92,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             Alamofire.request(url, method: .get, parameters: parameters)
                 .responseJSON { response in
                     if let result = response.result.value {
+                        print("result")
                         let json = JSON(result)
-                        print(json)
+                        self.jsonArray = self.updateStockData(json: json)
+                        
+                        self.tableView.reloadData()
                     } else {
                         print("Error")
                     }
@@ -99,15 +108,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: Updates Stocks and Parses JSON
     /***************************************************************/
     
-    func updateStockData(json: JSON) -> Array<Any> {
+    func updateStockData(json: JSON) -> Array<Array<String>> {
         
-        var stocksArray = [] as Array
+        var stocksArray : Array<Array<String>> = []
 
         for stock in 0..<json["Stock Quotes"].count {
             let stockSymbol = json["Stock Quotes"][stock]["1. symbol"].stringValue
             let stockPrice = json["Stock Quotes"][stock]["2. price"].doubleValue
-            stocksArray.append((stockSymbol, stockPrice))
+            let stockPriceRounded = String(format: "%.2f", arguments: [stockPrice])
+            stocksArray.append([stockSymbol, stockPriceRounded])
         }
+        
         return stocksArray
     }
     

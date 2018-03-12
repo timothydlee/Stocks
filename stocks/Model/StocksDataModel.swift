@@ -10,7 +10,8 @@ import Foundation
 import UIKit
 
 class StocksDataModel {
-    var stockInfo : [(String, String)] = [("SIRI", "6.53"), ("AAPL", "179.85"), ("INTL", "45.59")]
+//    var stockInfo : [(String, String)] = [("SIRI", "6.53"), ("AAPL", "179.85"), ("INTL", "45.59")]
+    var stockInfo : [(String, String)] = []
     // var symbol : String = ""
     // var price : Int = 0
 }
