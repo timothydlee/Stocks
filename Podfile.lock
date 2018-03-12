@@ -1,15 +1,18 @@
 PODS:
   - Alamofire (4.7.0)
+  - EasyAnimation (2.0.2)
   - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
   - Alamofire
+  - EasyAnimation
   - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  EasyAnimation: 977ef673efe8ce62447807eedb380a77b189dc80
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 19e1df4e26f98f4f673370551586627f82063df4
+PODFILE CHECKSUM: 408542a43430ded0a2e534649625ad1aa3afb2d7
 
 COCOAPODS: 1.4.0
