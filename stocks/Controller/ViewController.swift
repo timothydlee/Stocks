@@ -70,7 +70,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 //.reloadData() calls to have the UITableView to reload. Because stocksDataModel is initiated as an empty array, the app would not recognize stocksDataModel as having any data populated in it, since the API call is asynchronous.
                 self.tableView.reloadData()
-                print(self.stocksDataModel.stockInfo)
 
             } else {
 
