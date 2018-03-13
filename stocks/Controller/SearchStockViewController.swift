@@ -8,36 +8,31 @@
 import UIKit
 
 class SearchStockViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    //IBOutlet defining TextField that user inputs stock name
+    @IBOutlet weak var searchStockTextField: UITextField!
+    
+    //IBAction defining when the back button is pressed, which sends user back to main screen
     @IBAction func backButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "goBackToMainScreen", sender: self)
     }
     
-    @IBOutlet weak var searchStockTextField: UITextField!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
     @IBAction func searchForStockButtonPressed(_ sender: Any) {
-        print("worked")
+        if let searchInput = searchStockTextField.text {
+            print(searchInput)
+        } else {
+            return
+        }
     }
+    
+    
 }
