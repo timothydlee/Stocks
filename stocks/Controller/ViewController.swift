@@ -107,6 +107,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.backgroundColor = UIColorFromHex(rgbValue: 0xf9f9f9)
     }
     
+    
     //MARK: Function for using Hex Values for Color Styling
     /***************************************************************/
     func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
@@ -116,6 +117,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
     }
-
+    
+    //MARK: Segue function to move screen to the search stocks screen.
+    @IBAction func searchButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "goToSearchStocksScreen", sender: self)
+    }
+    
 }
 

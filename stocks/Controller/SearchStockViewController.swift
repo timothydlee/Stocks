@@ -1,14 +1,13 @@
 //
-//  SearchStocksViewController.swift
-//  stocks
+//  SearchStockViewController.swift
+//  
 //
 //  Created by Timothy Lee on 3/13/18.
-//  Copyright © 2018 Timothy Lee. All rights reserved.
 //
 
 import UIKit
 
-class SearchStocksViewController: UIViewController {
+class SearchStockViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,4 +31,13 @@ class SearchStocksViewController: UIViewController {
     }
     */
 
+    @IBAction func backButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "goBackToMainScreen", sender: self)
+    }
+    
+    @IBOutlet weak var searchStockTextField: UITextField!
+    
+    @IBAction func searchForStockButtonPressed(_ sender: Any) {
+        print("worked")
+    }
 }

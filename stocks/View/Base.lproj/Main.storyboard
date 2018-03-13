@@ -76,7 +76,8 @@
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="lbW-CI-UdB" kind="show" id="cwj-9E-t2l"/>
+                                    <action selector="searchButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o7u-LL-Awt"/>
+                                    <segue destination="VCF-yM-jgr" kind="show" identifier="goToSearchStocksScreen" id="S6K-zz-SiJ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -91,37 +92,51 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
-        <!--Search Stocks View Controller-->
-        <scene sceneID="2QC-cS-WUc">
+        <!--Search Stock View Controller-->
+        <scene sceneID="wlz-kN-mrf">
             <objects>
-                <viewController id="lbW-CI-UdB" customClass="SearchStocksViewController" customModule="stocks" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="4sR-sK-95O" customClass="SearchStocksViewController">
+                <viewController id="VCF-yM-jgr" customClass="SearchStockViewController" customModule="stocks" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Lf-dd-6iT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WdV-BF-pwC">
-                                <rect key="frame" x="16" y="37" width="30" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mZP-s6-IYV">
+                                <rect key="frame" x="16" y="40" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="back_arrow"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="1eK-Ef-5mz"/>
+                                    <action selector="backButtonPressed:" destination="VCF-yM-jgr" eventType="touchUpInside" id="LMb-mp-Si0"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="goBackToMainScreen" id="eue-NV-Nry"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Company or Symbol" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BMh-OV-lBX">
-                                <rect key="frame" x="87" y="151" width="200" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mnm-Pa-roZ">
+                                <rect key="frame" x="60" y="174" width="255" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P1n-Tm-avk">
+                                <rect key="frame" x="164" y="233" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="searchForStockButtonPressed:" destination="VCF-yM-jgr" eventType="touchUpInside" id="LsK-br-39D"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.09262192994" green="0.74913787840000001" blue="0.64335072039999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="Tkr-95-bk8"/>
+                        <viewLayoutGuide key="safeArea" id="Yxq-uQ-iYI"/>
                     </view>
+                    <connections>
+                        <outlet property="searchStockTextField" destination="mnm-Pa-roZ" id="rpe-ud-8cI"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YiV-fw-BLI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tq2-wt-4bc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="949.60000000000002" y="133.5832083958021"/>
+            <point key="canvasLocation" x="1152.8" y="133.5832083958021"/>
         </scene>
     </scenes>
     <resources>

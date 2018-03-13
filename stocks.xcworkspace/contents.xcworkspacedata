@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/timothylee/Google Drive/Coding/Project/stocks/stocks/stocks/Controller/SearchStockViewController.swift">
+   </FileRef>
+   <FileRef
       location = "group:stocks.xcodeproj">
    </FileRef>
    <FileRef
