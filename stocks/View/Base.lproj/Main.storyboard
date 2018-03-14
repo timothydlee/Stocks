@@ -144,17 +144,17 @@
         <!--Individual Stock Modal View Controller-->
         <scene sceneID="zHk-Tu-OXG">
             <objects>
-                <viewController id="pw9-jB-bZ2" customClass="IndividualStockModalViewController" customModule="stocks" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="pw9-jB-bZ2" customClass="IndividualStockModalViewController" customModule="stocks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="42N-WS-acl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uzS-X7-gkq">
-                                <rect key="frame" x="67" y="173" width="240" height="320"/>
+                                <rect key="frame" x="57" y="148" width="260" height="370"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1J-8l-Z3K">
-                                        <rect key="frame" x="0.0" y="282" width="240" height="38"/>
+                                        <rect key="frame" x="0.0" y="332" width="260" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="0.15164811643835616" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -162,14 +162,14 @@
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="closeButtonPressed:" destination="pw9-jB-bZ2" eventType="touchUpInside" id="i9d-Kc-XDg"/>
+                                            <action selector="closeButtonPressed:" destination="pw9-jB-bZ2" eventType="touchUpInside" id="oJz-LJ-7rj"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.23921568627450979" green="0.23921568627450979" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="0.50387949486301364" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="0ie-wj-HxK"/>
                     </view>
                 </viewController>
