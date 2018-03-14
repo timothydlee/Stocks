@@ -12,6 +12,7 @@
     <customFonts key="customFonts">
         <array key="HelveticaNeue.ttc">
             <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Bold</string>
             <string>HelveticaNeue-Medium</string>
         </array>
         <array key="HelveticaNeueLights.ttc">
@@ -138,6 +139,13 @@
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mf-Qs-xFS">
+                                        <rect key="frame" x="82" y="45" width="95" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.23717129230499268" green="0.23738053441047668" blue="0.2372036874294281" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -163,6 +171,7 @@
                         <outlet property="searchStockTextField" destination="mnm-Pa-roZ" id="rpe-ud-8cI"/>
                         <outlet property="stockModal" destination="wUo-UO-IFw" id="agh-gf-uxh"/>
                         <outlet property="stockModalConstraint" destination="XfV-bV-h2n" id="k4V-Nj-vSS"/>
+                        <outlet property="stockModalStockName" destination="8mf-Qs-xFS" id="1LW-x9-sgc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tq2-wt-4bc" userLabel="First Responder" sceneMemberID="firstResponder"/>

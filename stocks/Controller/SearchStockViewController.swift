@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class SearchStockViewController: UIViewController {
     
@@ -25,6 +26,7 @@ class SearchStockViewController: UIViewController {
         performSegue(withIdentifier: "goBackToMainScreen", sender: self)
     }
     
+    //IBOutlet representing the stockModal central constraint
     @IBOutlet weak var stockModalConstraint: NSLayoutConstraint!
     
     //IBAction defining when the search button is pressed, which sends user to modal with detailed Stock Info
@@ -32,17 +34,19 @@ class SearchStockViewController: UIViewController {
         stockModalConstraint.constant = 0
     }
     
+    @IBOutlet weak var stockModalStockName: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        stockModal.layer.zPosition = 100
     }
     
     //IBAction that initiates search for stock that user inputs
     @IBAction func searchForStockButtonPressed(_ sender: Any) {
         if let searchInput = searchStockTextField.text {
-            print(searchInput)
+
             let params : [String : String] = ["function" : "TIME_SERIES_DAILY", "symbol" : searchInput, "apikey" : "YF4GKFKVSW54BMH4"]
             self.checkStockFromInput(url: STOCKS_URL, parameters: params)
+            
         } else {
             return
         }
@@ -56,7 +60,11 @@ class SearchStockViewController: UIViewController {
             if response.result.isSuccess {
                 
                 let result = response.result.value!
-                print(result)
+                let json = JSON(result)
+                let stockName = json["Meta Data"]["2. Symbol"]
+                let x = json["Time Series (Daily)"][100]
+                print(x)
+                self.stockModalStockName.text = String(describing: stockName).uppercased()
                 
             } else {
                 
