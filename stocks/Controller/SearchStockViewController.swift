@@ -14,6 +14,9 @@ class SearchStockViewController: UIViewController {
     let STOCKS_URL = "https://www.alphavantage.co/query"
     let APP_ID = "YF4GKFKVSW54BMH4"
     
+    //IBOutlet defining stockModal that will appear and disappear.
+    @IBOutlet weak var stockModal: UIView!
+    
     //IBOutlet defining TextField that user inputs stock name
     @IBOutlet weak var searchStockTextField: UITextField!
     
@@ -22,17 +25,16 @@ class SearchStockViewController: UIViewController {
         performSegue(withIdentifier: "goBackToMainScreen", sender: self)
     }
     
+    @IBOutlet weak var stockModalConstraint: NSLayoutConstraint!
+    
     //IBAction defining when the search button is pressed, which sends user to modal with detailed Stock Info
     @IBAction func searchButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "goToStockInfoModal", sender: self)
+        stockModalConstraint.constant = 0
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        stockModal.layer.zPosition = 100
     }
     
     //IBAction that initiates search for stock that user inputs

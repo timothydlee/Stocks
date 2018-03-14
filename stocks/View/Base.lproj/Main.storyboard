@@ -109,16 +109,14 @@
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="goBackToMainScreen" id="eue-NV-Nry"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Company Name or Symbol" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mnm-Pa-roZ">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Company Name or Symbol" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mnm-Pa-roZ">
                                 <rect key="frame" x="60" y="173" width="255" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P1n-Tm-avk">
-                                <rect key="frame" x="148" y="229" width="79" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P1n-Tm-avk">
+                                <rect key="frame" x="156" y="229" width="63" height="36"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <state key="normal" title="Search">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -126,59 +124,50 @@
                                 <connections>
                                     <action selector="searchButtonPressed:" destination="VCF-yM-jgr" eventType="touchUpInside" id="dz2-mH-fPU"/>
                                     <action selector="searchForStockButtonPressed:" destination="VCF-yM-jgr" eventType="touchUpInside" id="LsK-br-39D"/>
-                                    <segue destination="pw9-jB-bZ2" kind="presentation" identifier="goToStockInfoModal" id="icP-Kg-tG9"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wUo-UO-IFw">
+                                <rect key="frame" x="-342.5" y="148" width="260" height="370"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IO8-p0-Jng">
+                                        <rect key="frame" x="0.0" y="325" width="260" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.75294117647058822" green="0.75294117647058822" blue="0.75294117647058822" alpha="0.14624357876712329" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                        <state key="normal" title="Close">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.23717129230499268" green="0.23738053441047668" blue="0.2372036874294281" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="370" id="o6F-CN-KQL"/>
+                                    <constraint firstAttribute="width" constant="260" id="s1e-ac-ZQT"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.094117647058823528" green="0.74901960784313726" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="mnm-Pa-roZ" firstAttribute="leading" secondItem="Yxq-uQ-iYI" secondAttribute="leading" constant="60" id="0oI-9s-ffE"/>
+                            <constraint firstItem="P1n-Tm-avk" firstAttribute="top" secondItem="mnm-Pa-roZ" secondAttribute="bottom" constant="26" id="GA2-M0-Mfs"/>
+                            <constraint firstItem="mnm-Pa-roZ" firstAttribute="centerX" secondItem="6Lf-dd-6iT" secondAttribute="centerX" id="TeL-h0-1Hf"/>
+                            <constraint firstItem="mnm-Pa-roZ" firstAttribute="centerX" secondItem="6Lf-dd-6iT" secondAttribute="centerX" id="VfK-t3-AgE"/>
+                            <constraint firstItem="mnm-Pa-roZ" firstAttribute="top" secondItem="Yxq-uQ-iYI" secondAttribute="top" constant="153" id="XBV-k7-piZ"/>
+                            <constraint firstItem="wUo-UO-IFw" firstAttribute="centerX" secondItem="6Lf-dd-6iT" secondAttribute="centerX" constant="-400" id="XfV-bV-h2n"/>
+                            <constraint firstItem="P1n-Tm-avk" firstAttribute="centerX" secondItem="6Lf-dd-6iT" secondAttribute="centerX" id="tep-QS-nX9"/>
+                            <constraint firstItem="wUo-UO-IFw" firstAttribute="centerY" secondItem="6Lf-dd-6iT" secondAttribute="centerY" id="uJ8-GE-egg"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Yxq-uQ-iYI"/>
                     </view>
                     <connections>
                         <outlet property="searchStockTextField" destination="mnm-Pa-roZ" id="rpe-ud-8cI"/>
+                        <outlet property="stockModal" destination="wUo-UO-IFw" id="agh-gf-uxh"/>
+                        <outlet property="stockModalConstraint" destination="XfV-bV-h2n" id="k4V-Nj-vSS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tq2-wt-4bc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1152.8" y="133.5832083958021"/>
-        </scene>
-        <!--Individual Stock Modal View Controller-->
-        <scene sceneID="zHk-Tu-OXG">
-            <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="pw9-jB-bZ2" customClass="IndividualStockModalViewController" customModule="stocks" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="42N-WS-acl">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uzS-X7-gkq">
-                                <rect key="frame" x="57" y="148" width="260" height="370"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1J-8l-Z3K">
-                                        <rect key="frame" x="0.0" y="332" width="260" height="38"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="0.15164811643835616" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <state key="normal" title="Close">
-                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="closeButtonPressed:" destination="pw9-jB-bZ2" eventType="touchUpInside" id="oJz-LJ-7rj"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.23921568627450979" green="0.23921568627450979" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="0.50387949486301364" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="0ie-wj-HxK"/>
-                    </view>
-                    <connections>
-                        <outlet property="stockModal" destination="uzS-X7-gkq" id="3kV-7s-yxd"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c3b-OA-IEv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1933.5999999999999" y="133.5832083958021"/>
         </scene>
     </scenes>
     <resources>
