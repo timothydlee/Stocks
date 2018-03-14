@@ -22,6 +22,11 @@ class SearchStockViewController: UIViewController {
         performSegue(withIdentifier: "goBackToMainScreen", sender: self)
     }
     
+    //IBAction defining when the search button is pressed, which sends user to modal with detailed Stock Info
+    @IBAction func searchButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "goToStockInfoModal", sender: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
