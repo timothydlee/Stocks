@@ -123,7 +123,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="searchButtonPressed:" destination="VCF-yM-jgr" eventType="touchUpInside" id="dz2-mH-fPU"/>
                                     <action selector="searchForStockButtonPressed:" destination="VCF-yM-jgr" eventType="touchUpInside" id="LsK-br-39D"/>
                                 </connections>
                             </button>
