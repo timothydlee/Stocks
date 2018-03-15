@@ -80,7 +80,7 @@ class SearchStockViewController: UIViewController {
         }
     }
     
-    //MARK: checkLatestPrice is function that takes user input of a stock symbol and makes API call for Alphavantage's INTRADAY series of information of 1 min refresh intervals and checks previous day's close. This is to obtain up to minute updates on current price, high and lows as well as set the day's opening price.
+    //MARK: checkLatestPrice is function that takes user input of a stock symbol and makes API call for Alphavantage's INTRADAY series of information of 1 min refresh intervals to check the current price. Additionally, a call is made ot the TIME SERIES DAILY function which and checks the overall day's open, highs and lows.
     /***************************************************************/
     
     func checkLatestPrice(url: String, parametersCurrent: [String : String], parametersPrevDay: [String : String]) {
@@ -103,14 +103,6 @@ class SearchStockViewController: UIViewController {
                 let currentPrice = lastRefreshTimeJSON["4. close"].doubleValue
                 let currentPriceRounded = String(format: "%.2f", arguments: [currentPrice])
                 self.stockModalCurrentStockPrice.text = "$\(currentPriceRounded)"
-                
-                let stockHigh = lastRefreshTimeJSON["2. high"].doubleValue
-                let stockHighRounded = String(format: "%.2f", arguments: [stockHigh])
-                self.stockModalStockHigh.text = "High: \(stockHighRounded)"
-                
-                let stockLow = lastRefreshTimeJSON["3. low"].doubleValue
-                let stockLowRounded = String(format: "%.2f", arguments: [stockLow])
-                self.stockModalStockLow.text = "Low: \(stockLowRounded)"
 
             } else {
                 
@@ -127,11 +119,25 @@ class SearchStockViewController: UIViewController {
                 
                 guard let result = response.result.value else { return }
                 let json = JSON(result)
-                let lastRefreshTime = String(describing: json["Meta Data"]["3. Last Refreshed"])
+                var lastRefreshTime = String(describing: json["Meta Data"]["3. Last Refreshed"])
                 
-                let latestResult = json["Time Series (Daily)"][lastRefreshTime]["4. close"].doubleValue
-                let stockModalOpen = String(format: "%.2f", arguments: [latestResult])
-                self.stockModalStockOpen.text = "Open: $\(stockModalOpen)"
+                //During an active trading day, in order to get the key in the dictionary formatted correctly, need to remove the timestamp after the date. This does that.
+                if let lastRefreshTimeFormatted = lastRefreshTime.range(of: " ") {
+                    lastRefreshTime.removeSubrange(lastRefreshTimeFormatted.lowerBound..<lastRefreshTime.endIndex)
+                    print(lastRefreshTimeFormatted)
+                }
+
+                let stockModalOpen = json["Time Series (Daily)"][lastRefreshTime]["1. open"].doubleValue
+                let stockModalOpenFormatted = String(format: "%.2f", arguments: [stockModalOpen])
+                self.stockModalStockOpen.text = "Open: $\(stockModalOpenFormatted)"
+                
+                let stockModalHigh = json["Time Series (Daily)"][lastRefreshTime]["2. high"].doubleValue
+                let stockModalHighFormatted = String(format: "%.2f", arguments: [stockModalHigh])
+                self.stockModalStockHigh.text = "High: \(stockModalHighFormatted)"
+                
+                let stockModalLow = json["Time Series (Daily)"][lastRefreshTime]["3. low"].doubleValue
+                let stockModalLowFormatted = String(format: "%.2f", arguments: [stockModalLow])
+                self.stockModalStockLow.text = "High: \(stockModalLowFormatted)"
                 
             } else {
                 
