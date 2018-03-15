@@ -42,9 +42,12 @@ class SearchStockViewController: UIViewController {
     }
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         //Gives modal rounded corners
         stockModal.layer.cornerRadius = 8
+        
     }
     
     //MARK: searchForStockButtonPressed initiates action for when user puts in stock ticker symbol to search.
@@ -58,7 +61,7 @@ class SearchStockViewController: UIViewController {
         } else if let searchInput = searchStockTextField.text {
             
             modalOn()
-            let params : [String : String] = ["function" : "TIME_SERIES_DAILY", "symbol" : searchInput, "apikey" : "YF4GKFKVSW54BMH4"]
+            let params : [String : String] = ["function" : "TIME_SERIES_INTRADAY", "symbol" : searchInput, "interval" : "1min", "apikey" : "YF4GKFKVSW54BMH4"]
             self.checkStockFromInput(url: STOCKS_URL, parameters: params)
             
         }
@@ -71,13 +74,30 @@ class SearchStockViewController: UIViewController {
             
             if response.result.isSuccess {
                 
+                //Parsing JSON result from the Intraday API Call from Alphavantage
                 guard let result = response.result.value else { return }
-                print(type(of: result))
-
-//                let stockName = json["Meta Data"]["2. Symbol"]
-//
-//                self.stockModalStockName.text = String(describing: stockName).uppercased()
+                let json = JSON(result)
+                let stockName = json["Meta Data"]["2. Symbol"]
+                guard let latestResult = json["Time Series (1min)"].first else { return }
                 
+                //Extracting individual results
+                let stockOpen = latestResult.1["1. open"].doubleValue
+                let stockHigh = latestResult.1["2. high"].doubleValue
+                let stockLow = latestResult.1["3. low"].doubleValue
+                let stockClose = latestResult.1["4. close"].doubleValue
+                
+                //Formatting to 2 decimal points.
+                let stockOpenRounded = String(format: "%.2f", arguments: [stockOpen])
+                let stockHighRounded = String(format: "%.2f", arguments: [stockHigh])
+                let stockLowRounded = String(format: "%.2f", arguments: [stockLow])
+                let stockCloseRounded = String(format: "%.2f", arguments: [stockClose])
+
+                print(stockName)
+                print("Open: \(stockOpenRounded)")
+                print("High: \(stockHighRounded)")
+                print("Low: \(stockLowRounded)")
+                print("Close: \(stockCloseRounded)")
+
             } else {
                 
                 print("Error \(String(describing: response.result.error))")
@@ -121,4 +141,5 @@ class SearchStockViewController: UIViewController {
             self.backgroundButton.alpha = 0
         })
     }
+
 }
