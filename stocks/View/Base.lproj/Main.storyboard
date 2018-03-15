@@ -127,6 +127,13 @@
                                     <action selector="searchForStockButtonPressed:" destination="VCF-yM-jgr" eventType="touchUpInside" id="LsK-br-39D"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VvT-m7-Wep">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="closeButtonPressed:" destination="VCF-yM-jgr" eventType="touchUpInside" id="HqI-62-oq7"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wUo-UO-IFw">
                                 <rect key="frame" x="-342.5" y="148" width="260" height="370"/>
                                 <subviews>
@@ -138,6 +145,9 @@
                                         <state key="normal" title="Close">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="closeButtonPressed:" destination="VCF-yM-jgr" eventType="touchUpInside" id="aTH-Nu-jnM"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mf-Qs-xFS">
                                         <rect key="frame" x="82" y="45" width="95" height="29"/>
@@ -157,17 +167,22 @@
                         <color key="backgroundColor" red="0.094117647058823528" green="0.74901960784313726" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="mnm-Pa-roZ" firstAttribute="leading" secondItem="Yxq-uQ-iYI" secondAttribute="leading" constant="60" id="0oI-9s-ffE"/>
+                            <constraint firstItem="Yxq-uQ-iYI" firstAttribute="bottom" secondItem="VvT-m7-Wep" secondAttribute="bottom" id="4mv-CF-s1b"/>
                             <constraint firstItem="P1n-Tm-avk" firstAttribute="top" secondItem="mnm-Pa-roZ" secondAttribute="bottom" constant="26" id="GA2-M0-Mfs"/>
                             <constraint firstItem="mnm-Pa-roZ" firstAttribute="centerX" secondItem="6Lf-dd-6iT" secondAttribute="centerX" id="TeL-h0-1Hf"/>
                             <constraint firstItem="mnm-Pa-roZ" firstAttribute="centerX" secondItem="6Lf-dd-6iT" secondAttribute="centerX" id="VfK-t3-AgE"/>
                             <constraint firstItem="mnm-Pa-roZ" firstAttribute="top" secondItem="Yxq-uQ-iYI" secondAttribute="top" constant="153" id="XBV-k7-piZ"/>
                             <constraint firstItem="wUo-UO-IFw" firstAttribute="centerX" secondItem="6Lf-dd-6iT" secondAttribute="centerX" constant="-400" id="XfV-bV-h2n"/>
+                            <constraint firstItem="Yxq-uQ-iYI" firstAttribute="top" secondItem="VvT-m7-Wep" secondAttribute="top" constant="20" id="lj2-yT-Ikv"/>
+                            <constraint firstItem="Yxq-uQ-iYI" firstAttribute="trailing" secondItem="VvT-m7-Wep" secondAttribute="trailing" id="nb2-xo-G7C"/>
+                            <constraint firstItem="VvT-m7-Wep" firstAttribute="leading" secondItem="Yxq-uQ-iYI" secondAttribute="leading" id="nyH-hZ-9u6"/>
                             <constraint firstItem="P1n-Tm-avk" firstAttribute="centerX" secondItem="6Lf-dd-6iT" secondAttribute="centerX" id="tep-QS-nX9"/>
                             <constraint firstItem="wUo-UO-IFw" firstAttribute="centerY" secondItem="6Lf-dd-6iT" secondAttribute="centerY" id="uJ8-GE-egg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Yxq-uQ-iYI"/>
                     </view>
                     <connections>
+                        <outlet property="backgroundButton" destination="VvT-m7-Wep" id="TzU-Sd-7tA"/>
                         <outlet property="searchStockTextField" destination="mnm-Pa-roZ" id="rpe-ud-8cI"/>
                         <outlet property="stockModal" destination="wUo-UO-IFw" id="agh-gf-uxh"/>
                         <outlet property="stockModalConstraint" destination="XfV-bV-h2n" id="k4V-Nj-vSS"/>

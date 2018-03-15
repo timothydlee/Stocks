@@ -11,7 +11,6 @@ import SwiftyJSON
 
 class SearchStockViewController: UIViewController {
     
-    
     let STOCKS_URL = "https://www.alphavantage.co/query"
     let APP_ID = "YF4GKFKVSW54BMH4"
     
@@ -31,13 +30,43 @@ class SearchStockViewController: UIViewController {
     
     //IBAction defining when the search button is pressed, which sends user to modal with detailed Stock Info
     @IBAction func searchButtonPressed(_ sender: Any) {
-        stockModalConstraint.constant = 0
+        //Shake animation that plays if the text field is empty.
+        if self.searchStockTextField.text == "" {
+            let animation = CABasicAnimation(keyPath: "position")
+            animation.duration = 0.07
+            animation.repeatCount = 4
+            animation.fromValue = NSValue(cgPoint: CGPoint(x: self.searchStockTextField.center.x - 10, y: self.searchStockTextField.center.y))
+            animation.toValue = NSValue(cgPoint: CGPoint(x: self.searchStockTextField.center.x + 10, y: self.searchStockTextField.center.y))
+            self.searchStockTextField.layer.add(animation, forKey: "position")
+        } else {
+            //If text field is not empty, the modal shows up.
+            stockModalConstraint.constant = 0
+            //Animation to slide in the modal over 0.3s.
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+                //Changes alpha setting to 0.5, which causes background behind modal to dim.
+                self.backgroundButton.alpha = 0.5
+            })
+        }
+        
     }
+    //IBAction defining when the close button is pressed, which dismisses the stock modal
+    @IBAction func closeButtonPressed(_ sender: Any) {
+        stockModalConstraint.constant = -400
+        UIView.animate(withDuration: 0.1, animations: {
+            self.view.layoutIfNeeded()
+            self.backgroundButton.alpha = 0
+        })
+    }
+    
+    //IBOutlet for background button that's screen sized, allows user to dismiss popup once done with it in addition to being able to close out from "Close" Button.
+    @IBOutlet weak var backgroundButton: UIButton!
     
     @IBOutlet weak var stockModalStockName: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        stockModal.layer.cornerRadius = 8
     }
     
     //IBAction that initiates search for stock that user inputs
@@ -59,16 +88,17 @@ class SearchStockViewController: UIViewController {
             
             if response.result.isSuccess {
                 
-                let result = response.result.value!
-                let json = JSON(result)
-                let stockName = json["Meta Data"]["2. Symbol"]
-                let x = json["Time Series (Daily)"][100]
-                print(x)
-                self.stockModalStockName.text = String(describing: stockName).uppercased()
+                guard let result = response.result.value else { return }
+                print(type(of: result))
+
+//                let stockName = json["Meta Data"]["2. Symbol"]
+//
+//                self.stockModalStockName.text = String(describing: stockName).uppercased()
                 
             } else {
                 
                 print("Error \(String(describing: response.result.error))")
+                
             }
         }
     }

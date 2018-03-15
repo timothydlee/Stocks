@@ -26,7 +26,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let STOCKS_URL = "https://www.alphavantage.co/query"
         let APP_ID = "YF4GKFKVSW54BMH4"
-    
         let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "INTL,SIRI,AAPL,MSFT,KBR,GOOGL,SNAP,JPM,AXP,AMZN", "apikey" : APP_ID]
         getStocksData(url: STOCKS_URL, parameters: batchStockParams)
 
@@ -63,7 +62,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
             if response.result.isSuccess {
 
-                let result = response.result.value!
+                guard let result = response.result.value else { return }
                 let json = JSON(result)
                 
                 //Setting model to result of the JSON parsing function
