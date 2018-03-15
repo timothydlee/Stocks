@@ -137,7 +137,7 @@ class SearchStockViewController: UIViewController {
                 
                 let stockModalLow = json["Time Series (Daily)"][lastRefreshTime]["3. low"].doubleValue
                 let stockModalLowFormatted = String(format: "%.2f", arguments: [stockModalLow])
-                self.stockModalStockLow.text = "High: \(stockModalLowFormatted)"
+                self.stockModalStockLow.text = "Low: \(stockModalLowFormatted)"
                 
             } else {
                 
