@@ -75,7 +75,7 @@ class SearchStockViewController: UIViewController {
             
             let yesterdayClosePriceParams : [String : String] = ["function" : "TIME_SERIES_DAILY", "symbol" : searchInput, "apikey" : APP_ID]
             let latestPriceParams : [String : String] = ["function" : "TIME_SERIES_INTRADAY", "symbol" : searchInput, "interval" : "1min", "apikey" : APP_ID]
-            self.checkLatestPrice(url: STOCKS_URL, parameters1: latestPriceParams, parameters2: yesterdayClosePriceParams)
+            self.checkLatestPrice(url: STOCKS_URL, parametersCurrent: latestPriceParams, parametersPrevDay: yesterdayClosePriceParams)
             
         }
     }
