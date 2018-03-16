@@ -30,6 +30,7 @@ class SearchStockViewController: UIViewController {
     @IBOutlet weak var backgroundButton: UIButton!
     
     //IBOutlet for labels with stock name, high, low, opening and closing prices in the modal
+    @IBOutlet weak var stockModalStockMessage: UILabel!
     @IBOutlet weak var stockModalStockName: UILabel!
     @IBOutlet weak var stockModalStockHigh: UILabel!
     @IBOutlet weak var stockModalStockLow: UILabel!
@@ -95,14 +96,20 @@ class SearchStockViewController: UIViewController {
                 let json = JSON(result)
                 
                 let stockName = String(describing: json["Meta Data"]["2. Symbol"])
-                self.stockModalStockName.text = stockName
+                if stockName == "null" {
+                    self.stockModalStockMessage.text = "Sorry, try another symbol."
+                    return
+                } else {
+                    self.stockModalStockName.text = stockName
+                    
+                    let lastRefreshTime = String(describing: json["Meta Data"]["3. Last Refreshed"])
+                    let lastRefreshTimeJSON = json["Time Series (1min)"][lastRefreshTime]
+                    
+                    let currentPrice = lastRefreshTimeJSON["4. close"].doubleValue
+                    let currentPriceRounded = String(format: "%.2f", arguments: [currentPrice])
+                    self.stockModalCurrentStockPrice.text = "$\(currentPriceRounded)"
+                }
                 
-                let lastRefreshTime = String(describing: json["Meta Data"]["3. Last Refreshed"])
-                let lastRefreshTimeJSON = json["Time Series (1min)"][lastRefreshTime]
-                
-                let currentPrice = lastRefreshTimeJSON["4. close"].doubleValue
-                let currentPriceRounded = String(format: "%.2f", arguments: [currentPrice])
-                self.stockModalCurrentStockPrice.text = "$\(currentPriceRounded)"
 
             } else {
                 

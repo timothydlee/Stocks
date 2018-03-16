@@ -28,26 +28,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let STOCKS_URL = "https://www.alphavantage.co/query"
         let APP_ID = "YF4GKFKVSW54BMH4"
+        
         let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "INTL,SIRI,AAPL,MSFT,KBR,GOOGL,SNAP,JPM,AXP,AMZN", "apikey" : APP_ID]
         getStocksData(url: STOCKS_URL, parameters: batchStockParams)
 
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
-    
-    //Requisite function of the UITableView controller that populates cells in each row, iterating over the counter, indexPath
+    //MARK: Requisite function of the UITableView controller that populates cells in each row, iterating over the counter, indexPath
+    /***************************************************************/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! customCell
         
         cell.firstViewTitleLabel.text = self.stocksDataModel.stockInfo[indexPath.row][0]
         cell.firstViewDetailLabel.text = "$\(self.stocksDataModel.stockInfo[indexPath.row][1])"
-        print(self.stocksDataModel.stockInfo[indexPath.row][1])
+        
         return cell
         
     }
     
+    //MARK: UITableView function that points at which row was selected and then if tapped, expands that row.
+    /***************************************************************/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if(selectedRowIndex == indexPath.row) {
             selectedRowIndex = -1
         } else {
@@ -57,17 +64,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView.beginUpdates()
         self.tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.fade)
         self.tableView.endUpdates()
+        
     }
     
-    //Requisite function of the UITableView controller. Updates the TableView to contain as many rows as are returned - in this case, as many rows as exists in stocksDataModel.stockInfo
+    //MARK: Requisite function of the UITableView controller. Updates the TableView to contain as many rows as are returned - in this case, as many rows as exists in stocksDataModel.stockInfo
+    /***************************************************************/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.stocksDataModel.stockInfo.count
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    //MARK: UITableViewCell styling
+    /***************************************************************/
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColorFromHex(rgbValue: 0xf9f9f9)
     }
     
+    //MARK: Function for using Hex Values for Color Styling
+    /***************************************************************/
+    func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
+        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
+        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
+        let blue = CGFloat(rgbValue & 0xFF)/256.0
+        
+        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
+    }
+    
+    //MARK: Tableview function that sets the height of the row of a cell
+    /***************************************************************/
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if (selectedRowIndex == indexPath.row) {
+            return 88
+        }
+        return 44
+        
+    }
     
     //MARK: Get Initial Stock Call
     /***************************************************************/
@@ -114,34 +145,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return stocksArray
         
-    }
-    
-    //MARK: UITableViewCell styling
-    /***************************************************************/
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = UIColorFromHex(rgbValue: 0xf9f9f9)
-    }
-    
-    //MARK: Tableview function that sets the height of the row of a cell
-    /***************************************************************/
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if (selectedRowIndex == indexPath.row) {
-            return 88
-        }
-        return 44
-        
-    }
-    
-    
-    //MARK: Function for using Hex Values for Color Styling
-    /***************************************************************/
-    func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
-        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
-        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
-        let blue = CGFloat(rgbValue & 0xFF)/256.0
-        
-        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
     }
     
     //MARK: Segue function to move screen to the search stocks screen.
