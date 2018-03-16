@@ -16,6 +16,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var tableView: UITableView!
     
     let stocksDataModel = StocksDataModel()
+    var thereIsCellTapped = false
+    var selectedRowIndex = -1
     
     override func viewDidLoad() {
         
@@ -31,16 +33,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     }
     
+    
+    
     //Requisite function of the UITableView controller that populates cells in each row, iterating over the counter, indexPath
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "stockCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! customCell
         
-        cell?.textLabel?.text = self.stocksDataModel.stockInfo[indexPath.row][0]
-        cell?.detailTextLabel?.text = self.stocksDataModel.stockInfo[indexPath.row][1]
+        cell.firstViewTitleLabel.text = self.stocksDataModel.stockInfo[indexPath.row][0]
+        cell.firstViewDetailLabel.text = "$\(self.stocksDataModel.stockInfo[indexPath.row][1])"
+        print(self.stocksDataModel.stockInfo[indexPath.row][1])
+        return cell
         
-        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if(selectedRowIndex == indexPath.row) {
+            selectedRowIndex = -1
+        } else {
+            selectedRowIndex = indexPath.row
+        }
         
+        self.tableView.beginUpdates()
+        self.tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+        self.tableView.endUpdates()
     }
     
     //Requisite function of the UITableView controller. Updates the TableView to contain as many rows as are returned - in this case, as many rows as exists in stocksDataModel.stockInfo
@@ -106,6 +122,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.backgroundColor = UIColorFromHex(rgbValue: 0xf9f9f9)
     }
     
+    //MARK: Tableview function that sets the height of the row of a cell
+    /***************************************************************/
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if (selectedRowIndex == indexPath.row) {
+            return 88
+        }
+        return 44
+        
+    }
+    
     
     //MARK: Function for using Hex Values for Color Styling
     /***************************************************************/
@@ -118,6 +145,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     //MARK: Segue function to move screen to the search stocks screen.
+    /***************************************************************/
     @IBAction func searchButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "goToSearchStocksScreen", sender: self)
     }

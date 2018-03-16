@@ -12,5 +12,6 @@ import UIKit
 class StocksDataModel {
 
     var stockInfo : Array<Array<String>> = []
+    var stockInfoOpenHighLow: Array<Array<String>> = []
     
 }
