@@ -133,23 +133,32 @@ class SearchStockViewController: UIViewController {
                     lastRefreshTime.removeSubrange(lastRefreshTimeFormatted.lowerBound..<lastRefreshTime.endIndex)
                     print(lastRefreshTimeFormatted)
                 }
-
-                let stockModalOpen = json["Time Series (Daily)"][lastRefreshTime]["1. open"].doubleValue
-                let stockModalOpenFormatted = String(format: "%.2f", arguments: [stockModalOpen])
-                self.stockModalStockOpen.text = "Open: $\(stockModalOpenFormatted)"
                 
-                let stockModalHigh = json["Time Series (Daily)"][lastRefreshTime]["2. high"].doubleValue
-                let stockModalHighFormatted = String(format: "%.2f", arguments: [stockModalHigh])
-                self.stockModalStockHigh.text = "High: \(stockModalHighFormatted)"
+                //If the user puts invalid ticker symbol, then it results in an edge case where the only message we want showing is the "Sorry, try another symbol" message from above.
+                let stockName = String(describing: json["Meta Data"]["2. Symbol"])
+                if stockName == "null" {
+                    self.stockModalStockOpen.text = ""
+                    self.stockModalStockHigh.text = ""
+                    self.stockModalStockLow.text = ""
+                } else {
+                    let stockModalOpen = json["Time Series (Daily)"][lastRefreshTime]["1. open"].doubleValue
+                    let stockModalOpenFormatted = String(format: "%.2f", arguments: [stockModalOpen])
+                    self.stockModalStockOpen.text = "Open: $\(stockModalOpenFormatted)"
+                    
+                    let stockModalHigh = json["Time Series (Daily)"][lastRefreshTime]["2. high"].doubleValue
+                    let stockModalHighFormatted = String(format: "%.2f", arguments: [stockModalHigh])
+                    self.stockModalStockHigh.text = "High: \(stockModalHighFormatted)"
+                    
+                    let stockModalLow = json["Time Series (Daily)"][lastRefreshTime]["3. low"].doubleValue
+                    let stockModalLowFormatted = String(format: "%.2f", arguments: [stockModalLow])
+                    self.stockModalStockLow.text = "Low: \(stockModalLowFormatted)"
+                }
                 
-                let stockModalLow = json["Time Series (Daily)"][lastRefreshTime]["3. low"].doubleValue
-                let stockModalLowFormatted = String(format: "%.2f", arguments: [stockModalLow])
-                self.stockModalStockLow.text = "Low: \(stockModalLowFormatted)"
                 
             } else {
                 
                 print("Error \(String(describing: response.result.error))")
-                
+
             }
         }
         
