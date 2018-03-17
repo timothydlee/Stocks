@@ -45,7 +45,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! customCell
         let stock = self.stocksDataModel.stocks[indexPath.row]
+        
         cell.firstViewTitleLabel.text = stock.stockName
+        
         if let currentPrice = stock.stockCurrent {
             cell.firstViewDetailLabel.text = "$\(currentPrice)"
         }
@@ -70,7 +72,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let symbol = self.stocksDataModel.stocks[indexPath.row].stockName
-        print("clicked: " + symbol)
         let params : [String : String] = ["function" : "TIME_SERIES_DAILY", "symbol" : symbol, "apikey" : APP_ID]
         
         getIndividualStockInfo(url: STOCKS_URL, parameters: params, symbol: symbol)
@@ -96,7 +97,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: UITableViewCell styling
     /***************************************************************/
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = UIColorFromHex(rgbValue: 0xf9f9f9)
+        
+        if (selectedRowIndex == indexPath.row) {
+            cell.backgroundColor = UIColorFromHex(rgbValue: 0x94ECBE)
+        } else {
+            cell.backgroundColor = UIColorFromHex(rgbValue: 0xf9f9f9)
+        }
     }
     
     //MARK: Function for using Hex Values for Color Styling
@@ -154,7 +160,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         for stock in 0..<json["Stock Quotes"].count {
             
-            
             let stockSymbol = json["Stock Quotes"][stock]["1. symbol"].stringValue
             let stockPrice = json["Stock Quotes"][stock]["2. price"].doubleValue
             //Formatting the price which returns with many decimals to 2 places
@@ -180,8 +185,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
                 guard let result = response.result.value else { return }
                 let json = JSON(result)
-                
-                print(symbol)
                 var stockObj : Stock?
                 for stock in self.stocksDataModel.stocks {
                     if stock.stockName == symbol {
@@ -189,31 +192,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         break
                     }
                 }
-                self.updatesThings(json: json, stockObj: stockObj!)
-                
-
-//                var lastRefreshTime = String(describing: json["Meta Data"]["3. Last Refreshed"])
-//
-//                //During an active trading day, in order to get the key in the dictionary formatted correctly, need to remove the timestamp after the date. This does that.
-//                if let lastRefreshTimeFormatted = lastRefreshTime.range(of: " ") {
-//                    lastRefreshTime.removeSubrange(lastRefreshTimeFormatted.lowerBound..<lastRefreshTime.endIndex)
-//                }
-//
-//                let stockOpen = json["Time Series (Daily)"][lastRefreshTime]["1. open"].doubleValue
-//                let stockOpenFormatted = String(format: "%.2f", arguments: [stockOpen])
-//
-//                let stockHigh = json["Time Series (Daily)"][lastRefreshTime]["2. high"].doubleValue
-//                let stockHighFormatted = String(format: "%.2f", arguments: [stockHigh])
-//
-//                let stockLow = json["Time Series (Daily)"][lastRefreshTime]["3. low"].doubleValue
-//                let stockLowFormatted = String(format: "%.2f", arguments: [stockLow])
-//                arrayInfo.append(stockOpenFormatted)
-//                arrayInfo.append(stockHighFormatted)
-//                arrayInfo.append(stockLowFormatted)
-
-
+                self.updatesOpenHighLow(json: json, stockObj: stockObj!)
                 self.tableView.reloadData()
-
 
             } else {
 
@@ -221,12 +201,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
             }
 
-
         }
         
     }
     
-    func updatesThings(json: JSON, stockObj: Stock) {
+    //MARK: Once the cell is clicked, this call updates the model with the selected stock's Open, High and Low prices.
+    /***************************************************************/
+    func updatesOpenHighLow(json: JSON, stockObj: Stock) {
         
         var lastRefreshTime = String(describing: json["Meta Data"]["3. Last Refreshed"])
         
