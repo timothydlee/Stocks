@@ -94,6 +94,13 @@
                                                                     <color key="textColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWS-5o-9wg">
+                                                                    <rect key="frame" x="124" y="-10.5" width="41" height="20.5"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                                    <color key="textColor" red="0.66274509800000003" green="0.66274509800000003" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaV-dg-Oew">
                                                                     <rect key="frame" x="8" y="54" width="33.5" height="20.5"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
@@ -141,9 +148,10 @@
                                             <outlet property="firstViewDetailLabel" destination="9c6-xK-7AO" id="qbH-uo-SOu"/>
                                             <outlet property="firstViewTitleLabel" destination="Qp8-zo-dZu" id="3GD-sL-uTn"/>
                                             <outlet property="secondView" destination="5aX-Sp-7aB" id="uym-oi-syM"/>
-                                            <outlet property="secondViewDetailLabel" destination="tCu-iY-EwW" id="26Q-gQ-9ef"/>
                                             <outlet property="secondViewHeightConstraint" destination="tRP-HJ-YYL" id="SB9-Vy-MHy"/>
-                                            <outlet property="secondViewTitleLabel" destination="gaV-dg-Oew" id="TtQ-ZZ-LDD"/>
+                                            <outlet property="secondViewHigh" destination="XWS-5o-9wg" id="Jcb-lg-c94"/>
+                                            <outlet property="secondViewLow" destination="gaV-dg-Oew" id="1Xf-ug-6ZC"/>
+                                            <outlet property="secondViewOpen" destination="tCu-iY-EwW" id="pmb-wM-LYG"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

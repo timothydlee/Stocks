@@ -16,8 +16,9 @@ class customCell: UITableViewCell {
     
 
     @IBOutlet weak var secondView: UIView!
-    @IBOutlet weak var secondViewTitleLabel: UILabel!
-    @IBOutlet weak var secondViewDetailLabel: UILabel!
+    @IBOutlet weak var secondViewOpen: UILabel!
+    @IBOutlet weak var secondViewHigh: UILabel!
+    @IBOutlet weak var secondViewLow: UILabel!
     @IBOutlet weak var secondViewHeightConstraint: NSLayoutConstraint!
     
     
