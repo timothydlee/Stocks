@@ -51,15 +51,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         if let currentOpen = stock.stockOpen {
-            cell.secondViewOpen.text = "$\(currentOpen)"
+            cell.secondViewOpen.text = "O: $\(currentOpen)"
         }
         
         if let currentHigh = stock.stockHigh {
-            cell.secondViewHigh.text = "$\(currentHigh)"
+            cell.secondViewHigh.text = "H: $\(currentHigh)"
         }
         
         if let currentLow = stock.stockLow {
-            cell.secondViewLow.text = "$\(currentLow)"
+            cell.secondViewLow.text = "L: $\(currentLow)"
         }
         
         return cell
@@ -114,7 +114,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if (selectedRowIndex == indexPath.row) {
-            return 132
+            return 88
         }
         return 44
         
