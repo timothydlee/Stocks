@@ -23,29 +23,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Stocks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gw-h4-TMn">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stocks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gw-h4-TMn">
                                 <rect key="frame" x="113" y="237" width="148" height="53"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="53" id="LAv-We-fsb"/>
-                                    <constraint firstAttribute="width" constant="148" id="OYY-3K-U4a"/>
+                                    <constraint firstAttribute="height" constant="53" id="fmY-pN-fF7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="32"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="stocks" translatesAutoresizingMaskIntoConstraints="NO" id="Tyo-PE-l2M">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stocks" translatesAutoresizingMaskIntoConstraints="NO" id="Tyo-PE-l2M">
                                 <rect key="frame" x="137" y="298" width="100" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="9bo-A7-EkX"/>
-                                    <constraint firstAttribute="width" constant="100" id="xKJ-RE-gvE"/>
-                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.094117647058823528" green="0.74901960784313726" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Tyo-PE-l2M" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bUv-dA-nzJ"/>
-                            <constraint firstItem="Tyo-PE-l2M" firstAttribute="top" secondItem="3gw-h4-TMn" secondAttribute="bottom" constant="8" id="pUV-sQ-oiw"/>
-                            <constraint firstItem="Tyo-PE-l2M" firstAttribute="top" secondItem="3gw-h4-TMn" secondAttribute="bottom" constant="8" id="xMy-AS-sEC"/>
+                            <constraint firstItem="Tyo-PE-l2M" firstAttribute="top" secondItem="3gw-h4-TMn" secondAttribute="bottom" constant="8" symbolic="YES" id="Bq9-a4-qIv"/>
+                            <constraint firstItem="3gw-h4-TMn" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Dp4-lf-Q0g"/>
+                            <constraint firstItem="Tyo-PE-l2M" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="137" id="H8S-Qc-PIc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Tyo-PE-l2M" secondAttribute="bottom" constant="269" id="LfN-a7-Q62"/>
+                            <constraint firstItem="3gw-h4-TMn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="217" id="cfs-MA-gcY"/>
+                            <constraint firstItem="3gw-h4-TMn" firstAttribute="centerX" secondItem="Tyo-PE-l2M" secondAttribute="centerX" id="rMD-WQ-CiU"/>
+                            <constraint firstItem="3gw-h4-TMn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="113" id="vne-Uv-IPk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

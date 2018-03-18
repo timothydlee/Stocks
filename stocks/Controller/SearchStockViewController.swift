@@ -215,6 +215,7 @@ class SearchStockViewController: UIViewController {
         self.stockModalStockLow.text = ""
         self.stockModalStockOpen.text = ""
         self.stockModalCurrentStockPrice.text = ""
+        self.stockModalStockMessage.text = ""
     }
 
 }

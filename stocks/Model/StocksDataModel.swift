@@ -10,14 +10,6 @@ import Foundation
 import UIKit
 
 class StocksDataModel {
-
-//    var stockInfo : Array<Array<String>> = []
-//    var stockInfoOpenHighLow: Array<String> = []
-//    var stockName : String
-//    var stockHigh : Int
-//    var stockLow : Int
-//    var stockClose : Int
-//    var stockOpen : Int
     
     var stocks: Array<Stock> = []
 
@@ -31,6 +23,7 @@ class Stock {
     var stockClose : Double?
     var stockOpen : Double?
     
+    //Only initializing stockName bc it is the only thing that is going to be saved to construct a Stock object and it will be used to identify the correct object.
     init?(stockName: String) {
         
         //Initialization should fail if name is empty
