@@ -10,9 +10,8 @@ import Alamofire
 import SwiftyJSON
 
 class SearchStockViewController: UIViewController {
-    
-    let STOCKS_URL = "https://www.alphavantage.co/query"
-    let APP_ID = "YF4GKFKVSW54BMH4"
+    let url = API_INFO.STOCKS_URL
+    let apikey = API_INFO.APP_ID
     
     //MARK: IBOutlets
     /***************************************************************/
@@ -74,9 +73,9 @@ class SearchStockViewController: UIViewController {
             
             modalOn()
             
-            let yesterdayClosePriceParams : [String : String] = ["function" : "TIME_SERIES_DAILY", "symbol" : searchInput, "apikey" : APP_ID]
-            let latestPriceParams : [String : String] = ["function" : "TIME_SERIES_INTRADAY", "symbol" : searchInput, "interval" : "1min", "apikey" : APP_ID]
-            self.checkLatestPrice(url: STOCKS_URL, parametersCurrent: latestPriceParams, parametersPrevDay: yesterdayClosePriceParams)
+            let yesterdayClosePriceParams : [String : String] = ["function" : "TIME_SERIES_DAILY", "symbol" : searchInput, "apikey" : apikey]
+            let latestPriceParams : [String : String] = ["function" : "TIME_SERIES_INTRADAY", "symbol" : searchInput, "interval" : "1min", "apikey" : apikey]
+            self.checkLatestPrice(url: url, parametersCurrent: latestPriceParams, parametersPrevDay: yesterdayClosePriceParams)
             
         }
     }

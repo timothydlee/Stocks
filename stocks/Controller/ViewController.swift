@@ -10,6 +10,11 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+struct API_INFO {
+    static let STOCKS_URL = "https://www.alphavantage.co/query"
+    static let APP_ID = "YF4GKFKVSW54BMH4"
+}
+
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
 
@@ -19,8 +24,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var thereIsCellTapped = false
     var selectedRowIndex = -1
-    let STOCKS_URL = "https://www.alphavantage.co/query"
-    let APP_ID = "YF4GKFKVSW54BMH4"
+    let url = API_INFO.STOCKS_URL
+    let apikey = API_INFO.APP_ID
     
     override func viewDidLoad() {
         
@@ -29,9 +34,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "INTL,SIRI,AAPL,MSFT,KBR,GOOGL,SNAP,JPM,AXP,AMZN", "apikey" : APP_ID]
+        let batchStockParams : [String : String] = ["function" : "BATCH_STOCK_QUOTES", "symbols" : "INTL,SIRI,AAPL,MSFT,KBR,GOOGL,SNAP,JPM,AXP,AMZN", "apikey" : apikey]
         
-        getStocksData(url: STOCKS_URL, parameters: batchStockParams)
+        getStocksData(url: url, parameters: batchStockParams)
 
     }
     
@@ -72,9 +77,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let symbol = self.stocksDataModel.stocks[indexPath.row].stockName
-        let params : [String : String] = ["function" : "TIME_SERIES_DAILY", "symbol" : symbol, "apikey" : APP_ID]
+        let params : [String : String] = ["function" : "TIME_SERIES_DAILY", "symbol" : symbol, "apikey" : apikey]
         
-        getIndividualStockInfo(url: STOCKS_URL, parameters: params, symbol: symbol)
+        getIndividualStockInfo(url: url, parameters: params, symbol: symbol)
         
         if(selectedRowIndex == indexPath.row) {
             selectedRowIndex = -1
