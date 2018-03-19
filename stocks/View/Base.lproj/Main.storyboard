@@ -126,11 +126,11 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stocks" textAlignment="natural" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6at-fq-L4a">
-                                <rect key="frame" x="137" y="85" width="100" height="37.5"/>
+                                <rect key="frame" x="137" y="81.5" width="100" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="biz-YN-zjq"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="32"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="34"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -270,9 +270,8 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wl3-Bm-oqK">
-                                        <rect key="frame" x="90" y="88" width="80" height="40"/>
+                                        <rect key="frame" x="0.0" y="88" width="260" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="3mw-hx-gTh"/>
                                             <constraint firstAttribute="height" constant="40" id="qQ6-YA-cUQ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
@@ -293,6 +292,7 @@
                                 <color key="backgroundColor" red="0.23717129230499268" green="0.23738053441047668" blue="0.2372036874294281" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="IO8-p0-Jng" secondAttribute="bottom" id="0XY-RQ-y8Q"/>
+                                    <constraint firstItem="wl3-Bm-oqK" firstAttribute="width" secondItem="wUo-UO-IFw" secondAttribute="width" id="3bg-pw-int"/>
                                     <constraint firstItem="hm9-Nm-aCW" firstAttribute="centerX" secondItem="wUo-UO-IFw" secondAttribute="centerX" id="3xG-gP-HnJ"/>
                                     <constraint firstItem="GCb-b6-HAd" firstAttribute="top" secondItem="boe-Uw-t0K" secondAttribute="bottom" constant="8" id="4TK-Xo-tpG"/>
                                     <constraint firstAttribute="trailing" secondItem="8mf-Qs-xFS" secondAttribute="trailing" constant="80" id="89e-hZ-aLR"/>
