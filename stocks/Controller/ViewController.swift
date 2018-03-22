@@ -88,7 +88,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         self.tableView.beginUpdates()
-        self.tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        self.tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.fade)
         self.tableView.endUpdates()
         
     }
