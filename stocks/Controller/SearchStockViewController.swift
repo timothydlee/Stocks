@@ -67,6 +67,7 @@ class SearchStockViewController: UIViewController {
     //IBAction that initiates search for stock that user inputs
     @IBAction func searchForStockButtonPressed(_ sender: Any) {
         
+        //Form validation
         if self.searchStockTextField.text == "" {
             
             shake()
@@ -75,9 +76,11 @@ class SearchStockViewController: UIViewController {
             
             modalOn()
             
-            let yesterdayClosePriceParams : [String : String] = ["function" : "TIME_SERIES_DAILY", "symbol" : searchInput, "apikey" : apikey]
+            let prevPriceParams : [String : String] = ["function" : "TIME_SERIES_DAILY", "symbol" : searchInput, "apikey" : apikey]
             let latestPriceParams : [String : String] = ["function" : "TIME_SERIES_INTRADAY", "symbol" : searchInput, "interval" : "1min", "apikey" : apikey]
-            self.checkLatestPrice(url: url, parametersCurrent: latestPriceParams, parametersPrevDay: yesterdayClosePriceParams)
+
+            
+            self.checkLatestPrice(url: url, parametersCurrent: latestPriceParams, parametersPrevDay: prevPriceParams)
             
         }
     }
@@ -87,6 +90,7 @@ class SearchStockViewController: UIViewController {
     
     func checkLatestPrice(url: String, parametersCurrent: [String : String], parametersPrevDay: [String : String]) {
         
+        //Latest price of stocks
         Alamofire.request(url, method: .get, parameters: parametersCurrent).responseJSON {
             response in
             
@@ -95,14 +99,12 @@ class SearchStockViewController: UIViewController {
                 //Parsing JSON result from the Intraday API Call from Alphavantage
                 guard let result = response.result.value else { return }
                 let json = JSON(result)
-                
                 let stockName = String(describing: json["Meta Data"]["2. Symbol"])
                 if stockName == "null" {
                     self.stockModalStockMessage.text = "Sorry, try another symbol."
                     return
                 } else {
                     self.stockModalStockName.text = stockName
-                    
                     let lastRefreshTime = String(describing: json["Meta Data"]["3. Last Refreshed"])
                     let lastRefreshTimeJSON = json["Time Series (1min)"][lastRefreshTime]
                     
@@ -120,6 +122,7 @@ class SearchStockViewController: UIViewController {
             
         }
         
+        //Previous day's close
         Alamofire.request(url, method: .get, parameters: parametersPrevDay).responseJSON {
             response in
             
@@ -132,7 +135,6 @@ class SearchStockViewController: UIViewController {
                 //During an active trading day, in order to get the key in the dictionary formatted correctly, need to remove the timestamp after the date. This does that.
                 if let lastRefreshTimeFormatted = lastRefreshTime.range(of: " ") {
                     lastRefreshTime.removeSubrange(lastRefreshTimeFormatted.lowerBound..<lastRefreshTime.endIndex)
-                    print(lastRefreshTimeFormatted)
                 }
                 
                 //If the user puts invalid ticker symbol, then it results in an edge case where the only message we want showing is the "Sorry, try another symbol" message from above.
